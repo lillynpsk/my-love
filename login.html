@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login 💕</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="login-container">
+    <h1>Welcome 💖</h1>
+    <p>私たちの愛のページに入る</p>
+
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+      <hr>
+      <a href="#" onclick="showHint()">ヒント</a>
+      <p id="error" style="color:red; display:none;">Username หรือ Password ไม่ถูกต้อง</p>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

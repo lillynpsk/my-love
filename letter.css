@@ -1,0 +1,220 @@
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 52px;
+  color: #c45c82;
+}
+.subtitle {
+  letter-spacing: 5px;
+  color: #c45c82;
+  font-size: 13px;
+  margin-top: 2px;
+  margin-bottom: 80px;
+}
+
+/*
+  โครงสร้าง HTML (เรียงตาม z-index จากล่างขึ้นบน):
+
+    z-1  .env-back-body     ← พื้นซองสีชมพู
+    z-2  .paper             ← กระดาษ (อยู่หน้าพื้นซอง)
+    z-3  .env-bottom-cover  ← แผ่นทึบครึ่งล่าง สีเดียวกับซอง บังกระดาษส่วนล่าง
+    z-4  .env-triangles     ← สามเหลี่ยมตกแต่ง
+    z-5  .from .to          ← ข้อความ
+    z-9  .flap              ← ฝาซอง (อยู่หน้าสุดตอนปิด, ไปหลังตอนเปิด)
+*/
+
+.scene {
+  position: relative;
+  width: 450px;
+  margin: 0 auto;
+  height: 280px;
+  overflow: visible;
+  cursor: pointer;
+}
+
+/* ============ พื้นซอง z-index:1 ============ */
+.env-back-body {
+  position: absolute;
+  inset: 0;
+  background: #ec7171;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+/* ============ กระดาษ z-index:2 ============
+   อยู่หน้าพื้นซอง แต่หลัง env-bottom-cover
+   ดังนั้นส่วนล่างถูกบังโดย env-bottom-cover
+   ส่วนบนที่โผล่เกิน .scene ขึ้นไป → มองเห็นได้ */
+.paper {
+  position: absolute;
+  left: 75px;
+  width: 300px;
+  min-height: 210px;
+  background: #fff5f7;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(200, 80, 120, 0.15);
+  z-index: 4;
+
+  /* เริ่มต้น: จมในซอง */
+  top: 35px;
+  transition: top 0s, box-shadow 0.3s;
+}
+
+/* peek: กระดาษโผล่ขึ้นครึ่งนึง */
+.paper.peek {
+  top: -80px;
+  transition: top 0.7s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* out: กระดาษออกมาเต็มใบ */
+.paper.out {
+  top: -170px;
+  box-shadow: 0 12px 40px rgba(200, 80, 120, 0.25);
+  transition: top 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ลายตาราง */
+.paper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background-image:
+    linear-gradient(rgba(255, 182, 210, 0.25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 182, 210, 0.25) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+.paper-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.paper-ribbon {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.paper-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 28px;
+  color: #c45c82;
+  margin-bottom: 12px;
+}
+
+.paper-body {
+  font-size: 13px;
+  line-height: 2;
+  color: #7a3550;
+}
+
+/* ============ แผ่นบังส่วนล่าง z-index:3 ============
+   สีเดียวกับซอง วางทับส่วนล่าง
+   ทำให้ดูเหมือนกระดาษอยู่ในซอง
+   ไม่มี overflow hidden ทุกอย่างใช้ z-index ล้วนๆ */
+.env-bottom-cover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 145px;
+  background: #f6a5a5;
+  border-radius: 0 0 10px 10px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ============ สามเหลี่ยมตกแต่ง z-index:4 ============ */
+.env-tri-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 140px solid transparent;
+  border-bottom: 140px solid transparent;
+  border-left: 225px solid #ee9090;
+  z-index: 4;
+}
+
+.env-tri-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 140px solid transparent;
+  border-bottom: 140px solid transparent;
+  border-right: 225px solid #ee9090;
+  z-index: 4;
+}
+
+.env-tri-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 225px solid transparent;
+  border-right: 225px solid transparent;
+  border-bottom: 145px solid #ec7171;
+  z-index: 4;
+}
+
+/* ===== ข้อความซอง ===== */
+.from, .to {
+  position: absolute;
+  left: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-style: italic;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.from {
+  bottom: 38px;
+}
+
+.to {
+  bottom: 20px;
+}
+
+/* ============ ฝาซอง z-index:9 (ปิด) / z-index:1 (เปิด) ============ */
+.flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 225px solid transparent;
+  border-right: 225px solid transparent;
+  border-top: 155px solid #f19a9a;
+  transform-origin: top center;
+  transition: transform 0.6s ease;
+  z-index: 4;
+}
+.flap-heart {
+  position: absolute;
+  top: -30px;          /* ปรับขึ้นลงให้ตรงปลายแหลม */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  color: white;
+  pointer-events: none;
+}
+/* ตอนเปิด: ฝาพับขึ้น ลด z-index ให้กระดาษโผล่ผ่านได้ */
+.scene.open .flap {
+  transform: rotateX(-180deg);
+  z-index: 1;
+}
+

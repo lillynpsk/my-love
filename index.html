@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Happy valentine's Day 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <div class="hearts"></div>
+    <div class="container fade-in">
+        <h1>Happy Valentine's Day Teerak🌹💖</h1>
+        <p>ギアのために作った特別なウェブサイトでございます</p>
+    </div>
+    <div class="love-timer">
+        <h3>Together For</h3>
+        <div id="countdown">
+            <span id="days">0</span>日 :
+            <span id="hours">0</span>時間 :
+            <span id="minutes">0</span>分 :
+            <span id="seconds">0</span>秒
+        </div>
+    </div>
+    
+    <div class="menu">
+
+        <a href="timeline.html" class="card yellow">
+            <div class="icon">⏰</div>
+            <h2>タイムライン</h2>
+            <p>私たちの思い出💖</p>
+        </a>
+
+        <a href="photos.html" class="card purple">
+            <div class="icon">👾</div>
+            <h2>ゲーム</h2>
+            <p>ゲームしない？🎮</p>
+        </a>
+
+        <a href="letters.html" class="card pink">
+            <div class="icon">💌</div>
+            <h2>ラブレター</h2>
+            <p>ギアへ💗</p>
+        </a>
+
+        <a href="music.html" class="card blue">
+            <div class="icon">🎵</div>
+            <h2>ミュージック</h2>
+            <p>💖</p>
+        </a>
+
+    </div>
+    <br>
+    <br>
+    <button class="logout-btn" onclick="logout()">Logout🥺👋</button>
+    <br><br>
+    <script>
+        if (localStorage.getItem("isLogin") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Letter 💕</title>
+  <link rel="stylesheet" href="letter.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="timeline.html">Timeline</a>
+    <a href="photos.html">Game</a>
+    <a href="letters.html">Letter</a>
+    <a href="music.html">Music</a>
+  </nav>
+  <h1 class="title">Love</h1>
+  <p class="subtitle">Letter</p>
+
+  <div class="scene" id="scene" onclick="openLetter()">
+
+    <!-- z-1: พื้นซอง -->
+    <div class="env-back-body"></div>
+
+    <!-- z-2: กระดาษ -->
+    <div class="paper" id="paper">
+      <div class="paper-content">
+        <div class="paper-ribbon">🎀</div>
+        <div class="paper-title">Happy Valentine's Day</div>
+        <p class="paper-body">
+          いつもそばにいてくれてありがとう✨<br>
+          ギアのこと、ほんとうにだ〜いすきだよ💖<br>
+          毎日幸せをくれてありがとう<br>
+          大好きだよ、ずっと一緒にいてね
+        </p>
+      </div>
+    </div>
+
+    <!-- z-3: แผ่นบังส่วนล่าง -->
+    <div class="env-bottom-cover"></div>
+
+    <!-- z-4: สามเหลี่ยมตกแต่ง -->
+    <div class="env-tri-left"></div>
+    <div class="env-tri-right"></div>
+    <div class="env-tri-bottom"></div>
+
+    <!-- z-5: ข้อความ -->
+    <span class="from">From Lilly</span>
+    <span class="to">To Gear</span>
+
+    <!-- z-9: ฝาซอง -->
+    <div class="flap">  
+      <div class="flap-heart">❤</div>
+    </div>
+
+  </div>
+
+  <script src="letter.js"></script>
+
+</body>
+</html>
